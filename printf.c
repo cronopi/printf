@@ -21,6 +21,9 @@ void	ft_putstr(char *s)
 
 int	ft_printf(const char *str, ...)
 {
+	if ()//
+
+	else if()
 
 
 	return (1);
@@ -28,10 +31,9 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	int numero;
+	char	str[] = "Hello world\n";
 
-	numero = printf("patata");
-	printf("%i", numero);
+	ft_printf(str, ...);
 	return (0);
 }
 
