@@ -1,41 +1,72 @@
-#include <stdio.h>
+#include "printf.h"
 
-void	ft_putchar(char c)
+void	ft_index(char *str, int i)
 {
-	write(1, &c, 1);
+	if (str[i + 1] == 's')
+	{
+
+	}
+	else if (str[i + 1] == 'i')
+	{
+		//escribe los números del parámetro contiene los números enteros
+	}
+	else if (str[i + 1] == 'd')
+	{
+		//escribe los numeros y decimales del parámetro que es un decimal
+	}
+	else if (str[i + 1] == 'c')
+	{
+		//escribe el caracter del parámetro que es una letra
+	/*	void	ft_putchar(char c)
+		{
+			write(1, &c, 1);
+		}
+		*/
+	}
 }
 
-void	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		return ;
+		return (0);
 	while (s[i] != '\0')
 	{
+		if (s[i] == '%')
+		{
+			ft_index(s, i);
+			/*
+				en caso de que encuentre un % yo quiero:
+					comprobar en la siguinte posición[i + 1] si es una c d i x etc
+					que i avance 2 posiciones puesto que yo no quiero imprimir el %c
+			*/
+		}
 		write(1, &s[i], 1);
 		i++;
 	}
+	return (i);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	//if ()
-
-	//else if()
-
-	return (1);
+	int	i;
+	i = ft_putstr((char *)str);
+	return (i);
 }
 
 int	main(void)
 {
-	char	str[] = "Hello world\n";
-	char	*alcachofa;
-	int		puerro;
-	float	patata;
+	//char	str[] = "Hello world\n";
+	//char	*alcachofa;
+	//int		puerro;
+	//float	patata;
+	int		N_devuelto;
 
-	ft_printf("verduras: %s %i %d", alcachofa, puerro, patata);
+	//ft_printf("verduras: %s %i %d", alcachofa, puerro, patata);
+	N_devuelto = ft_printf("hola\n");
+	//printf("hola\n");
 	return (0);
 }
 /*
@@ -73,6 +104,9 @@ int	main(void)
 		}
 	}
 	cuando deje de usar las listas, tengo que usar va_end como si fuese un close(fd)
+
+
+
 */
 
 
