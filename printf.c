@@ -1,19 +1,62 @@
 #include "printf.h"
 
-int	ft_index(char *str, int i)
+void	ft_putchar(char c)
 {
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		ft_putnbr_fd(147483648, fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar('-');
+		n = -n;
+		ft_putnbr_fd(n, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd((n / 10), fd);
+		ft_putnbr_fd((n % 10), fd);
+	}
+	else
+		ft_putchar(n + 48);
+}
+
+int	ft_index(char *str, int i, va_list arguments)
+{
+	char	every_char;
+	char	*every_string;
+	int		every_integer;
+
 	if (str[i + 1] == 'c')
 	{
-		printf("check de c\n");
-		//va_start(,str);
-		//imprime un solo caracter
-		//ft_putchar(char c)
+		every_char = va_arg(arguments, int);
+		ft_putchar(every_char);
 	}
 	else if (str[i + 1] == 's')
 	{
-		printf("check de s\n");
-		//Imprime una string
-		//
+		every_string = va_arg(arguments, char *);
+		ft_putstr(every_string);
 	}
 	else if (str[i + 1] == 'p')
 	{
@@ -29,9 +72,8 @@ int	ft_index(char *str, int i)
 	}
 	else if (str[i + 1] == 'i')
 	{
-		printf("check de i\n");
-		//mprime un entero en base 10.
-		//ft_putnbr_fd(int n, int fd);
+		every_integer = va_arg(arguments, int);
+		ft_putnbr_fd(every_integer, 1);
 	}
 	else if (str[i + 1] == 'u')
 	{
@@ -53,15 +95,13 @@ int	ft_index(char *str, int i)
 	}
 	else if (str[i + 1] == '%')
 	{
-		printf("check de porcentaje\n");
-		//para imprimir el símbolo del porcentaje.
-		//
+		write(1, "%", 1);
 	}
-	i = i + 2;
+	i = i + 2; // puede dar problemas cuando es la última posición.
 	return (i);
 }
 
-int	ft_putstr(char *str)
+int	ft_string_copy(char *str, va_list arguments)
 {
 	int	i;
 
@@ -72,7 +112,7 @@ int	ft_putstr(char *str)
 	{
 		while (str[i] == '%')
 		{
-			i = ft_index(str, i);
+			i = ft_index(str, i, arguments);
 		}
 		write(1, &str[i], 1);
 		i++;
@@ -83,39 +123,35 @@ int	ft_putstr(char *str)
 int	ft_printf(const char *str, ...)
 {
 	int i;
-	char every_char;
 	va_list arguments;
 
-
 	va_start(arguments,str);
-	every_char = va_arg(arguments, int);
-	printf("que imprime esto?:%c\n", every_char);
-	i = ft_putstr((char *)str);
+	i =ft_string_copy((char *)str, arguments);
+	va_end(arguments);
 	return (i);
 }
 
 int	main(void)
 {
-	//char	str[] = "Hello world\n";
-	int	alcachofa;
-	int		puerro;
-	//int		N_devuelto;
+	char	array[] = "Hello world";
+	char	alcachofa;
+	char	puerro;
+	int		number;
+	//char	N_devuelto;
 
 	alcachofa = 'a';
-	puerro = 5;
-	ft_printf("verduras: %c %i", alcachofa, puerro);
-	//N_devuelto = ft_printf("hola\n");
-	//printf("hola\n");
+	puerro = 'b';
+	number = 5;
+	ft_printf("verduras: %c %c %s %i %%", alcachofa, puerro, array, number);
+	//N_devuelto = ft_printf("verduras: %c %c", alcachofa, puerro);
 	return (0);
 }
+
 /*
-	imprimir palabros
-	imprimir un char
 
 	va_list son los puntos suspensivos
 	patata,puerro acachofa nodos de la lista
 	los parámetros se almacenan(al menos en este caso) en direcciones de memoria contiguas.
-
 
 	va_start= dos parámetros: una lista de argumentos y el otro es la variable anterior.
 	va_list = es un tipo de variable, que almacena una lista de argumentos variables.
@@ -123,13 +159,13 @@ int	main(void)
 	va_arg = la forma de extraer argumentos de la lista, recibe 2 parámetros.
 	el primero es la lista. y el segundo, es el tipo de variable.
 	una vez extrae el argumento de la lista avanza al siguiente nodo(o posición)
-<
+
 	me falta saber que tipo de variable es cada una para poder extraerla bien, y poder trabajar con ella.
 
 	cuando deje de usar las listas, tengo que usar va_end como si fuese un close(fd)
 
-
-
+	every_char = va_arg(arguments, int); // asignas a la variable el contenido del argumento y avanzas una posición. (extraes con va la siguiente variable de la lista de argumentos y la asignas a otra variable)
+	printf("que imprime esto?:%c\n", every_char);
 */
 
 
