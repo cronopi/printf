@@ -1,6 +1,6 @@
 #include "printf.h"
 
-int	ft_check_base(char *base, int i, char *str)
+/* int	ft_check_base(char *base, int i, char *str)
 {
 	int	j;
 
@@ -81,169 +81,7 @@ int	ft_atoi_base(char *str, char *base)
 	}
 	return (sign * nbr);
 }
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i] != '\0')
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	if (n == -2147483648)
-	{
-		ft_putchar('-');
-		ft_putchar('2');
-		ft_putnbr_fd(147483648, fd);
-	}
-	else if (n < 0)
-	{
-		ft_putchar('-');
-		n = -n;
-		ft_putnbr_fd(n, fd);
-	}
-	else if (n > 9)
-	{
-		ft_putnbr_fd((n / 10), fd);
-		ft_putnbr_fd((n % 10), fd);
-	}
-	else
-		ft_putchar(n + 48);
-}
-
-void	fill_string(long int nbr, char *str, int i)
-{
-	int	temp;
-
-	temp = 0;
-	while (i-- > 0)
-	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 10;
-			str[i] = temp + '0';
-			nbr = nbr / 10;
-		}
-	}
-}
-
-int	string_size(long long int n, int i)
-{
-	if (n == 0)
-		i = 1;
-	if (n < 0)
-		n = n * -1;
-	while (n > 0)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-int	itoa_sign(int n)
-{
-	if (n >= 0)
-		return (0);
-	else
-		return (1);
-}
-
-char	*ft_itoa(int n)
-{
-	char			*str;
-	int				i;
-	long long int	nbr;
-	int				sign;
-
-	sign = itoa_sign(n);
-	i = 0;
-	nbr = (long long int)n;
-	i = string_size(nbr, i);
-	if (nbr < 0)
-		nbr = nbr * -1;
-	str = malloc(sizeof(char) * (i + sign + 1));
-	if (!str)
-		return (NULL);
-	str[i + sign] = '\0';
-	fill_string(nbr, str, i + sign);
-	if (sign)
-		str[0] = '-';
-	return (str);
-}
-
-double	ft_decimal(double number)
-{
-	char *str;
-	int i;
-
-	i = 0;
-	str = ft_itoa(number);
-	while(str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-	return (number);
-}
-
-char *ft_itohex(int number)
-{
-	char	*str;
-	int		i;
-	int		temp;
-	int		nbr;
-
-	i = 0;
-	str = 0;
-	nbr = number;
-	while (number > 0)
-	{
-		number = number / 16;
-		i++;
-	}
-	str = malloc(sizeof(char) * (i + 1));
-	str[i + 1] = '\0';
-	while (i-- > 0)
-	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 16;
-			if (temp >= 10 && temp <= 16)
-				str[i] = temp + 87;
-			else
-				str[i] = temp + '0';
-			nbr = nbr / 16;
-		}
-	}
-	return (str);
-}
-
-void	ft_hex_print(char *str)
-{
-	int i;
-
-	i = 0;
-
-	while(str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
+ */
 
 int	ft_index(char *str, int i, va_list arguments)
 {
@@ -287,16 +125,13 @@ int	ft_index(char *str, int i, va_list arguments)
 	}
 	else if (str[i + 1] == 'x')
 	{
-		printf("checkeo de x\n");
 		every_hex = va_arg(arguments, int);
-		printf("%s\n", ft_itohex(every_hex));
-		//printf("que imprime el hex:%s\n", ft_itoa(ft_atoi_base(ft_itoa(every_hex), "0123456789abcdef")));
+		ft_hex_print(ft_itohex(every_hex), 1);
 	}
 	else if (str[i + 1] == 'X')
 	{
-		printf("check de X\n");
 		every_hex = va_arg(arguments, int);
-		//
+		ft_hex_print(ft_itohex(every_hex), 2);
 	}
 	else if (str[i + 1] == '%')
 	{
@@ -351,9 +186,9 @@ int	main(void)
 	puerro = 'b';
 	number = 5;
 	numerico = 64326;
-	nonegativo = 4444444;
-	hex = 10;
-	ft_printf("verduras: %c %c %s %i %% %d %u %x", alcachofa, puerro, array, number, numerico, nonegativo, hex);
+	nonegativo = 333;
+	hex = 938;
+	ft_printf("verduras: %c %c %s %i %% %d %u %X", alcachofa, puerro, array, number, numerico, nonegativo, hex);
 	//N_devuelto = ft_printf("verduras: %c %c", alcachofa, puerro);
 	return (0);
 }

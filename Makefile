@@ -7,8 +7,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
-
-SRC = printf.c
+SRC = printf.c ft_putstr.c ft_putnbr.c ft_putchar.c ft_itohex.c ft_hex_print.c ft_decimal.c
 
 OBJ = $(SRC:.c=.o)
 INCLUDE = printf.h
