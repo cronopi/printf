@@ -1,5 +1,87 @@
 #include "printf.h"
 
+int	ft_check_base(char *base, int i, char *str)
+{
+	int	j;
+
+	j = 0;
+	while (str[i] != base[j] && base[j] != '\0')
+		j++;
+	return (j);
+}
+
+int	ft_check_parameters2(char *base)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (base[i] != '\0')
+	{
+		j = i + 1;
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+			return (0);
+		while (base[j] != '\0')
+		{
+			if (base[i] == base[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_check_parameters1(char *str, int i, char *base)
+{
+	int	sign;
+
+	sign = 1;
+	if (base[0] == '\0' || base[1] == '\0')
+		return (0);
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\t' || str[i] == '\v')
+		i++;
+	while (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = sign * -1;
+		i++;
+	}
+	if (ft_check_parameters2(base) == 0)
+		return (0);
+	return (sign);
+}
+
+int	ft_atoi_base(char *str, char *base)
+{
+	int	lengh;
+	int	i;
+	int	j;
+	int	nbr;
+	int	sign;
+
+	lengh = 0;
+	nbr = 0;
+	i = 0;
+	sign = ft_check_parameters1(str, i, base);
+	if (sign == 0)
+		return (0);
+	while (base[lengh] != '\0')
+		lengh++;
+	while (str[i] != base[ft_check_base (base, i, str)])
+		i++;
+	while (str[i] != '\0' && str[i] == base[ft_check_base (base, i, str)])
+	{
+		j = 0;
+		while (str[i] != base[j])
+			j++;
+		nbr = nbr * lengh + j;
+		i++;
+	}
+	return (sign * nbr);
+}
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -42,11 +124,135 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar(n + 48);
 }
 
+void	fill_string(long int nbr, char *str, int i)
+{
+	int	temp;
+
+	temp = 0;
+	while (i-- > 0)
+	{
+		if (nbr >= 0)
+		{
+			temp = nbr % 10;
+			str[i] = temp + '0';
+			nbr = nbr / 10;
+		}
+	}
+}
+
+int	string_size(long long int n, int i)
+{
+	if (n == 0)
+		i = 1;
+	if (n < 0)
+		n = n * -1;
+	while (n > 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
+}
+
+int	itoa_sign(int n)
+{
+	if (n >= 0)
+		return (0);
+	else
+		return (1);
+}
+
+char	*ft_itoa(int n)
+{
+	char			*str;
+	int				i;
+	long long int	nbr;
+	int				sign;
+
+	sign = itoa_sign(n);
+	i = 0;
+	nbr = (long long int)n;
+	i = string_size(nbr, i);
+	if (nbr < 0)
+		nbr = nbr * -1;
+	str = malloc(sizeof(char) * (i + sign + 1));
+	if (!str)
+		return (NULL);
+	str[i + sign] = '\0';
+	fill_string(nbr, str, i + sign);
+	if (sign)
+		str[0] = '-';
+	return (str);
+}
+
+double	ft_decimal(double number)
+{
+	char *str;
+	int i;
+
+	i = 0;
+	str = ft_itoa(number);
+	while(str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (number);
+}
+
+char *ft_itohex(int number)
+{
+	char	*str;
+	int		i;
+	int		temp;
+	int		nbr;
+
+	i = 0;
+	str = 0;
+	nbr = number;
+	while (number > 0)
+	{
+		number = number / 16;
+		i++;
+	}
+	str = malloc(sizeof(char) * (i + 1));
+	str[i + 1] = '\0';
+	while (i-- > 0)
+	{
+		if (nbr >= 0)
+		{
+			temp = nbr % 16;
+			if (temp >= 10 && temp <= 16)
+				str[i] = temp + 87;
+			else
+				str[i] = temp + '0';
+			nbr = nbr / 16;
+		}
+	}
+	return (str);
+}
+
+void	ft_hex_print(char *str)
+{
+	int i;
+
+	i = 0;
+
+	while(str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
 int	ft_index(char *str, int i, va_list arguments)
 {
 	char	every_char;
 	char	*every_string;
 	int		every_integer;
+	double	every_double;
+	unsigned int every_unsigned_int;
+	int		every_hex;
 
 	if (str[i + 1] == 'c')
 	{
@@ -66,9 +272,8 @@ int	ft_index(char *str, int i, va_list arguments)
 	}
 	else if (str[i + 1] == 'd')
 	{
-		printf("check de d\n");
-		//Imprime un número decimal (base 10)
-		//
+		every_double = va_arg(arguments, double);
+		ft_decimal(every_double);
 	}
 	else if (str[i + 1] == 'i')
 	{
@@ -77,20 +282,20 @@ int	ft_index(char *str, int i, va_list arguments)
 	}
 	else if (str[i + 1] == 'u')
 	{
-		printf("check de u\n");
-		//Imprime un número decimal (base 10) sin signo.
-		//
+		every_unsigned_int = va_arg(arguments, unsigned int);
+		ft_decimal(every_unsigned_int);
 	}
 	else if (str[i + 1] == 'x')
 	{
-		printf("check de x\n");
-		// Imprime un número hexadecimal (base 16) en minúsculas.
-		//
+		printf("checkeo de x\n");
+		every_hex = va_arg(arguments, int);
+		printf("%s\n", ft_itohex(every_hex));
+		//printf("que imprime el hex:%s\n", ft_itoa(ft_atoi_base(ft_itoa(every_hex), "0123456789abcdef")));
 	}
 	else if (str[i + 1] == 'X')
 	{
 		printf("check de X\n");
-		// Imprime un número hexadecimal (base 16) en mayúsculas.
+		every_hex = va_arg(arguments, int);
 		//
 	}
 	else if (str[i + 1] == '%')
@@ -137,12 +342,18 @@ int	main(void)
 	char	alcachofa;
 	char	puerro;
 	int		number;
+	double	numerico;
+	unsigned int	nonegativo;
+	int				hex;
 	//char	N_devuelto;
 
 	alcachofa = 'a';
 	puerro = 'b';
 	number = 5;
-	ft_printf("verduras: %c %c %s %i %%", alcachofa, puerro, array, number);
+	numerico = 64326;
+	nonegativo = 4444444;
+	hex = 10;
+	ft_printf("verduras: %c %c %s %i %% %d %u %x", alcachofa, puerro, array, number, numerico, nonegativo, hex);
 	//N_devuelto = ft_printf("verduras: %c %c", alcachofa, puerro);
 	return (0);
 }
