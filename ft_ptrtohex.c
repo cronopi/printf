@@ -1,11 +1,11 @@
 #include "ft_printf.h"
 
-char *ft_itohex(int number)
+char	*ft_ptrtohex(unsigned long int number)
 {
 	char	*str;
 	int		i;
 	int		temp;
-	int		nbr;
+	unsigned long int		nbr;
 
 	i = 0;
 	str = 0;

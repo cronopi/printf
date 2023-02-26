@@ -1,87 +1,4 @@
-#include "printf.h"
-
-/* int	ft_check_base(char *base, int i, char *str)
-{
-	int	j;
-
-	j = 0;
-	while (str[i] != base[j] && base[j] != '\0')
-		j++;
-	return (j);
-}
-
-int	ft_check_parameters2(char *base)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (base[i] != '\0')
-	{
-		j = i + 1;
-		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
-			return (0);
-		while (base[j] != '\0')
-		{
-			if (base[i] == base[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	ft_check_parameters1(char *str, int i, char *base)
-{
-	int	sign;
-
-	sign = 1;
-	if (base[0] == '\0' || base[1] == '\0')
-		return (0);
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r'
-		|| str[i] == '\t' || str[i] == '\v')
-		i++;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = sign * -1;
-		i++;
-	}
-	if (ft_check_parameters2(base) == 0)
-		return (0);
-	return (sign);
-}
-
-int	ft_atoi_base(char *str, char *base)
-{
-	int	lengh;
-	int	i;
-	int	j;
-	int	nbr;
-	int	sign;
-
-	lengh = 0;
-	nbr = 0;
-	i = 0;
-	sign = ft_check_parameters1(str, i, base);
-	if (sign == 0)
-		return (0);
-	while (base[lengh] != '\0')
-		lengh++;
-	while (str[i] != base[ft_check_base (base, i, str)])
-		i++;
-	while (str[i] != '\0' && str[i] == base[ft_check_base (base, i, str)])
-	{
-		j = 0;
-		while (str[i] != base[j])
-			j++;
-		nbr = nbr * lengh + j;
-		i++;
-	}
-	return (sign * nbr);
-}
- */
+#include "ft_printf.h"
 
 int	ft_index(char *str, int i, va_list arguments)
 {
@@ -91,6 +8,7 @@ int	ft_index(char *str, int i, va_list arguments)
 	double	every_double;
 	unsigned int every_unsigned_int;
 	int		every_hex;
+	void	*every_pointer;
 
 	if (str[i + 1] == 'c')
 	{
@@ -104,9 +22,8 @@ int	ft_index(char *str, int i, va_list arguments)
 	}
 	else if (str[i + 1] == 'p')
 	{
-		printf("check de p\n");
-		//El puntero void * dado como argumento se imprime en formato hexadecimal.
-		//
+		every_pointer = va_arg(arguments, void *);
+		ft_hex_print_void(every_pointer, 1);
 	}
 	else if (str[i + 1] == 'd')
 	{
@@ -157,6 +74,7 @@ int	ft_string_copy(char *str, va_list arguments)
 		write(1, &str[i], 1);
 		i++;
 	}
+	printf("\nesto que es:%i\n", i);
 	return (i);
 }
 
@@ -169,28 +87,6 @@ int	ft_printf(const char *str, ...)
 	i =ft_string_copy((char *)str, arguments);
 	va_end(arguments);
 	return (i);
-}
-
-int	main(void)
-{
-	char	array[] = "Hello world";
-	char	alcachofa;
-	char	puerro;
-	int		number;
-	double	numerico;
-	unsigned int	nonegativo;
-	int				hex;
-	//char	N_devuelto;
-
-	alcachofa = 'a';
-	puerro = 'b';
-	number = 5;
-	numerico = 64326;
-	nonegativo = 333;
-	hex = 938;
-	ft_printf("verduras: %c %c %s %i %% %d %u %X", alcachofa, puerro, array, number, numerico, nonegativo, hex);
-	//N_devuelto = ft_printf("verduras: %c %c", alcachofa, puerro);
-	return (0);
 }
 
 /*

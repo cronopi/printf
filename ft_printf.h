@@ -14,5 +14,7 @@ void	ft_putchar(char c);
 void	ft_hex_print(char *str, int upper_lower);
 char	*ft_itohex(int number);
 double	ft_decimal(double number);
+void	ft_hex_print_void(void *str, int upper_lower);
+char	*ft_ptrtohex(unsigned long int number);
 
 #endif
