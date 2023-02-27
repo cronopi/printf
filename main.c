@@ -2,25 +2,44 @@
 
 int	main(void)
 {
-	char	array[] = "Hello world";
-	char	alcachofa;
-	char	puerro;
-	int		number;
-	double	numerico;
-	unsigned int	nonegativo;
-	int				hex;
-	void	*pointer;
-	//char	N_devuelto;
+	//char	puerro;
+	//double	numerico;
+	//unsigned int	nonegativo;
+	//int				hex;
+	//void	*pointer;
+	char	N_devuelto;
 
+	//puerro = 'b';
+	//numerico = 64326;
+	//nonegativo = 333;
+	//hex = 938;
+	//pointer = &number;
+
+	int		number;
+	number = -5777;
+	N_devuelto = ft_printf("verduras: %i ", number);
+	ft_printf("\n%i\n", N_devuelto);
+	N_devuelto = printf("verduras: %i ", number);
+	printf("\n%i\n", N_devuelto);
+
+/* 	char	alcachofa;
 	alcachofa = '0';
-	puerro = 'b';
-	number = 5;
-	numerico = 64326;
-	nonegativo = 333;
-	hex = 938;
-	pointer = &number;
-	ft_printf("verduras: %c %c %s %i %% %d %u %X %p", alcachofa, puerro, array, number, numerico, nonegativo, hex, pointer);
-	//printf("este el void pointer:%p\n", str);
-	//N_devuelto = ft_printf("verduras: %c %c", alcachofa, puerro);
+	ft_printf("verduras: %c %c %c  ", alcachofa, alcachofa, alcachofa);
+	N_devuelto = printf("verduras: %c %c %c  ", alcachofa, alcachofa, alcachofa);
+	printf("\n%i\n", N_devuelto); */
+
+/* 	char	array[] = "Hello wolrd";
+	N_devuelto = ft_printf("verduras: %p ", array);
+	printf("\n%i\n", N_devuelto);
+	N_devuelto = printf("verduras: %p ", array);
+	printf("\n%i\n", N_devuelto);
+ */
 	return (0);
 }
+
+
+/* 		if (every_integer > 0)
+		{
+			(*j)++;
+			every_integer = every_integer / 10;
+		} */

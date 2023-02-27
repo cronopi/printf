@@ -6,6 +6,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stddef.h>
 
 int		ft_printf(const char *str, ...);
 void	ft_putstr(char *s);
@@ -16,5 +17,7 @@ char	*ft_itohex(int number);
 double	ft_decimal(double number);
 void	ft_hex_print_void(void *str, int upper_lower);
 char	*ft_ptrtohex(unsigned long int number);
+size_t	ft_strlen(const char *str);
+char	*ft_itoa(int n);
 
 #endif
