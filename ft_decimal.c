@@ -73,5 +73,6 @@ double	ft_decimal(double number)
 		write(1, &str[i], 1);
 		i++;
 	}
+	free(str);
 	return (number);
 }

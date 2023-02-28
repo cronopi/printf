@@ -9,6 +9,8 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	unsigned int every_unsigned_int;
 	int		every_hex;
 	void	*every_pointer;
+	char	*test;
+	char	*test2;
 
 	if (str[i + 1] == 'c')
 	{
@@ -37,26 +39,29 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	{
 		every_integer = va_arg(arguments, int);
 		ft_putnbr_fd(every_integer, 1);
-		(*j) = (*j) + ft_strlen(ft_itoa(every_integer));
+		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		free(test);
 	}
 	else if (str[i + 1] == 'u')
 	{
 		every_unsigned_int = va_arg(arguments, unsigned int);
 		ft_decimal(every_unsigned_int);
-		(*j) = (*j) + ft_strlen(ft_itoa(every_integer));
-
+		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		free(test);
 	}
 	else if (str[i + 1] == 'x')
 	{
 		every_hex = va_arg(arguments, int);
 		ft_hex_print(ft_itohex(every_hex), 1);
-		(*j) = (*j) + ft_strlen(ft_itoa(every_integer));
+		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		free(test);
 	}
 	else if (str[i + 1] == 'X')
 	{
 		every_hex = va_arg(arguments, int);
 		ft_hex_print(ft_itohex(every_hex), 2);
-		(*j) = (*j) + ft_strlen(ft_itoa(every_integer));
+		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		free(test);
 	}
 	else if (str[i + 1] == '%')
 	{

@@ -16,7 +16,7 @@ int	main(void)
 	//pointer = &number;
 
 	int		number;
-	number = -5777;
+	number = 10;
 	N_devuelto = ft_printf("verduras: %i ", number);
 	ft_printf("\n%i\n", N_devuelto);
 	N_devuelto = printf("verduras: %i ", number);
