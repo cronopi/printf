@@ -17,9 +17,9 @@ int	main(void)
 
 	int		number;
 	number = 10;
-	N_devuelto = ft_printf("verduras: %i ", number);
+	N_devuelto = ft_printf("verduras: %d ", number);
 	ft_printf("\n%i\n", N_devuelto);
-	N_devuelto = printf("verduras: %i ", number);
+	N_devuelto = printf("verduras: %d ", number);
 	printf("\n%i\n", N_devuelto);
 
 /* 	char	alcachofa;

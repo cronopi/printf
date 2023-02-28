@@ -30,12 +30,7 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 		ft_hex_print_void(every_pointer, 1);
 		//(*j) = (*j) + ft_strlen(every_pointer);
 	}
-	else if (str[i + 1] == 'd')
-	{
-		every_double = va_arg(arguments, double);
-		ft_decimal(every_double);
-	}
-	else if (str[i + 1] == 'i')
+	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
 	{
 		every_integer = va_arg(arguments, int);
 		ft_putnbr_fd(every_integer, 1);
