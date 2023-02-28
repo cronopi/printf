@@ -5,7 +5,6 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	char	every_char;
 	char	*every_string;
 	int		every_integer;
-	double	every_double;
 	unsigned int every_unsigned_int;
 	int		every_hex;
 	void	*every_pointer;
@@ -22,7 +21,10 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	{
 		every_string = va_arg(arguments, char *);
 		ft_putstr(every_string);
+		if (every_string)
 		(*j) = (*j) + ft_strlen(every_string);
+		else
+			(*j) = (*j) + 6;
 	}
 	else if (str[i + 1] == 'p')
 	{
@@ -40,22 +42,21 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	else if (str[i + 1] == 'u')
 	{
 		every_unsigned_int = va_arg(arguments, unsigned int);
-		ft_decimal(every_unsigned_int);
-		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		(*j) = (*j) + ft_strlen(test = ft_print_utoa(every_unsigned_int));
 		free(test);
 	}
 	else if (str[i + 1] == 'x')
 	{
 		every_hex = va_arg(arguments, int);
-		ft_hex_print(ft_itohex(every_hex), 1);
-		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		ft_hex_print( test =ft_itohex(every_hex), 1);
+		(*j) = (*j) + ft_strlen(test);
 		free(test);
 	}
 	else if (str[i + 1] == 'X')
 	{
 		every_hex = va_arg(arguments, int);
-		ft_hex_print(ft_itohex(every_hex), 2);
-		(*j) = (*j) + ft_strlen(test = ft_itoa(every_integer));
+		ft_hex_print(test = ft_itohex(every_hex), 2);
+		(*j) = (*j) + ft_strlen(test);
 		free(test);
 	}
 	else if (str[i + 1] == '%')

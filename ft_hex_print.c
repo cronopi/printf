@@ -16,5 +16,4 @@ void	ft_hex_print(char *str, int upper_lower)
 		write(1, &str[i], 1);
 		i++;
 	}
-	free(str);
 }

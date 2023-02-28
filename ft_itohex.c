@@ -5,18 +5,23 @@ char *ft_itohex(int number)
 	char	*str;
 	int		i;
 	int		temp;
-	int		nbr;
+	unsigned int		nbr;
 
 	i = 0;
+	if (number == 0)
+		i = 1;
 	str = 0;
-	nbr = number;
-	while (number > 0)
+	nbr = (unsigned int)(4294967296 + number);
+	while (nbr > 0)
 	{
-		number = number / 16;
+		nbr = nbr / 16;
 		i++;
 	}
+	nbr = (unsigned int)(4294967296 + number);
 	str = malloc(sizeof(char) * (i + 1));
-	str[i + 1] = '\0';
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
 	while (i-- > 0)
 	{
 		if (nbr >= 0)
