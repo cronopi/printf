@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 SRC = printf.c ft_putstr.c ft_putnbr.c ft_putchar.c ft_itohex.c ft_hex_print.c ft_hex_print_void.c\
-ft_ptrtohex.c ft_strlen.c ft_itoa.c ft_print_utoa.c
+ft_ptrtohex.c ft_strlen.c ft_itoa.c ft_print_utoa.c ft_strdup.c
 
 OBJ = $(SRC:.c=.o)
 INCLUDE = ft_printf.h

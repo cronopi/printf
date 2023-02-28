@@ -20,5 +20,6 @@ char	*ft_ptrtohex(unsigned long int number);
 size_t	ft_strlen(const char *str);
 char	*ft_itoa(int n);
 char	*ft_print_utoa(unsigned int number);
+char	*ft_strdup(const char *s);
 
 #endif

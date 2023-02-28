@@ -36,9 +36,9 @@ int	main(void)
 	void	*pointer;
 	number = 0;
 	pointer = &number;
-	N_devuelto = ft_printf("verduras: %p ", pointer);
+	N_devuelto = ft_printf("verduras: %p ", 0);
 	printf("\n%i\n", N_devuelto);
-	N_devuelto = printf("verduras: %p ", pointer);
+	N_devuelto = printf("verduras: %p ", 0);
 	printf("\n%i\n", N_devuelto);
 
 	return (0);
