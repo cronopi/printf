@@ -4,21 +4,20 @@ int	main(void)
 {
 	//char	puerro;
 	//double	numerico;
-	//void	*pointer;
 	//unsigned int	nonegativo;
+	//char	array[] = "Hello wolrd";
 	char	N_devuelto;
 
 	//nonegativo = -555;
 	//puerro = 'b';
 	//numerico = 64326;
-	//pointer = &number;
 
-	int		hex;
+/* 	int		hex;
 	hex = 0;
 	N_devuelto = ft_printf("verduras: %x  ", hex);
 	ft_printf("\n%i\n", N_devuelto);
 	N_devuelto = printf("verduras: %x  ", hex);
-	printf("\n%i\n", N_devuelto);
+	printf("\n%i\n", N_devuelto); */
 
 /* 	char	alcachofa;
 	alcachofa = '0';
@@ -33,12 +32,15 @@ int	main(void)
 	printf("\n%i\n", N_devuelto);
  */
 
-/* 	char	array[] = "Hello wolrd";
-	N_devuelto = ft_printf("verduras: %p ", array);
+	int number;
+	void	*pointer;
+	number = 0;
+	pointer = &number;
+	N_devuelto = ft_printf("verduras: %p ", pointer);
 	printf("\n%i\n", N_devuelto);
-	N_devuelto = printf("verduras: %p ", array);
+	N_devuelto = printf("verduras: %p ", pointer);
 	printf("\n%i\n", N_devuelto);
- */
+
 	return (0);
 }
 

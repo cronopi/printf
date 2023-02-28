@@ -5,7 +5,6 @@ void	ft_hex_print(char *str, int upper_lower)
 	int i;
 
 	i = 0;
-
 	while(str[i] != '\0')
 	{
 		if (upper_lower == 2)

@@ -10,6 +10,7 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	void	*every_pointer;
 	char	*test;
 	char	*test2;
+	int algo;
 
 	if (str[i + 1] == 'c')
 	{
@@ -29,8 +30,9 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 	else if (str[i + 1] == 'p')
 	{
 		every_pointer = va_arg(arguments, void *);
-		ft_hex_print_void(every_pointer, 1);
-		//(*j) = (*j) + ft_strlen(every_pointer);
+		algo = ft_strlen(test = ft_hex_print_void(every_pointer, 1));
+		free(test);
+		(*j) = (*j) + algo + 2;
 	}
 	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
 	{

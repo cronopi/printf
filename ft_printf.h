@@ -15,7 +15,7 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar(char c);
 void	ft_hex_print(char *str, int upper_lower);
 char	*ft_itohex(int number);
-void	ft_hex_print_void(void *str, int upper_lower);
+char	*ft_hex_print_void(void *ptr, int upper_lower);
 char	*ft_ptrtohex(unsigned long int number);
 size_t	ft_strlen(const char *str);
 char	*ft_itoa(int n);

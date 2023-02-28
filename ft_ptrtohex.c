@@ -16,7 +16,7 @@ char	*ft_ptrtohex(unsigned long int number)
 		i++;
 	}
 	str = malloc(sizeof(char) * (i + 1));
-	str[i + 1] = '\0';
+	str[i] = '\0';
 	while (i-- > 0)
 	{
 		if (nbr >= 0)
