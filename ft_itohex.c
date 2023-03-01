@@ -12,6 +12,22 @@
 
 #include "ft_printf.h"
 
+/* void	convert(int i, int nbr, int temp, char *str)
+{
+	while (i-- > 0)
+	{
+		if (nbr >= 0)
+		{
+			temp = nbr % 16;
+			if (temp >= 10 && temp <= 16)
+				str[i] = temp + 87;
+			else
+				str[i] = temp + '0';
+			nbr = nbr / 16;
+		}
+	}
+} */
+
 char	*ft_itohex(int number)
 {
 	char				*str;

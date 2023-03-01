@@ -12,6 +12,14 @@
 
 #include "ft_printf.h"
 
+void	convert(int temp, char *str, int i)
+{
+	if (temp >= 10 && temp <= 16)
+		str[i] = temp + 87;
+	else
+		str[i] = temp + '0';
+}
+
 char	*ft_ptrtohex(unsigned long int number)
 {
 	char					*str;
@@ -34,10 +42,7 @@ char	*ft_ptrtohex(unsigned long int number)
 		if (nbr >= 0)
 		{
 			temp = nbr % 16;
-			if (temp >= 10 && temp <= 16)
-				str[i] = temp + 87;
-			else
-				str[i] = temp + '0';
+			convert(temp, str, i);
 			nbr = nbr / 16;
 		}
 	}
