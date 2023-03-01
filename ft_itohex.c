@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 10:39:30 by rcastano          #+#    #+#             */
+/*   Updated: 2023/03/01 10:39:31 by rcastano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char *ft_itohex(int number)
+char	*ft_itohex(int number)
 {
-	char	*str;
-	int		i;
-	int		temp;
+	char				*str;
+	int					i;
+	int					temp;
 	unsigned int		nbr;
 
 	i = 0;

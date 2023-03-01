@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_utoa.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 10:40:38 by rcastano          #+#    #+#             */
+/*   Updated: 2023/03/01 10:40:39 by rcastano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static void	fill_string(unsigned long int nbr, char *str, int i)
@@ -47,15 +59,15 @@ static char	*ft_utoa(unsigned int n)
 
 char	*ft_print_utoa(unsigned int number)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = ft_utoa(number);
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		write(1, &str[i], 1);
 		i++;
 	}
-	return(str);
+	return (str);
 }
