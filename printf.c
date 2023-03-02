@@ -12,23 +12,51 @@
 
 #include "ft_printf.h"
 
-int	ft_index(char *str, int i, va_list arguments, int *j)
+void	ft_index3(char *str, int i, va_list arguments, int *j)
 {
-	char			every_char;
-	char			*every_string;
-	int				every_integer;
-	unsigned int	every_unsigned_int;
-	int				every_hex;
-	void			*every_pointer;
-	char			*test;
-	char			*test2;
-	int				algo;
+	int		every_integer;
+	char	*tmp_str;
+
+	if (str[i + 1] == 'u')
+	{
+		every_integer = va_arg(arguments, unsigned int);
+		tmp_str = ft_print_utoa(every_integer);
+		(*j) = (*j) + ft_strlen(tmp_str);
+		free(tmp_str);
+	}
+	else if (str[i + 1] == 'x')
+	{
+		every_integer = va_arg(arguments, int);
+		ft_hex_print(tmp_str = ft_itohex(every_integer), 1);
+		(*j) = (*j) + ft_strlen(tmp_str);
+		free(tmp_str);
+	}
+	else if (str[i + 1] == 'X')
+	{
+		every_integer = va_arg(arguments, int);
+		ft_hex_print(tmp_str = ft_itohex(every_integer), 2);
+		(*j) = (*j) + ft_strlen(tmp_str);
+		free(tmp_str);
+	}
+}
+
+void	ft_index2(char *str, int i, va_list arguments, int *j)
+{
+	int		every_integer;
+	char	*every_string;
 
 	if (str[i + 1] == 'c')
 	{
-		every_char = va_arg(arguments, int);
-		ft_putchar(every_char);
+		ft_putchar(va_arg(arguments, int));
 		(*j)++;
+	}
+	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
+	{
+		every_integer = va_arg(arguments, int);
+		ft_putnbr_fd(every_integer, 1);
+		every_string = ft_itoa(every_integer);
+		(*j) = (*j) + ft_strlen(every_string);
+		free(every_string);
 	}
 	else if (str[i + 1] == 's')
 	{
@@ -39,51 +67,31 @@ int	ft_index(char *str, int i, va_list arguments, int *j)
 		else
 			(*j) = (*j) + 6;
 	}
-	else if (str[i + 1] == 'p')
+}
+
+int	ft_index(char *str, int i, va_list arguments, int *j)
+{
+	char			*every_string;
+	void			*every_pointer;
+	char			*tmp_str;
+
+	if (str[i + 1] == 'p')
 	{
 		every_pointer = va_arg(arguments, void *);
-		test = ft_hex_print_void(every_pointer, 1);
-		algo = ft_strlen(test);
-		free(test);
+		tmp_str = ft_hex_print_void(every_pointer, 1);
 		if (every_pointer != 0)
-			(*j) = (*j) + algo + 2;
+			(*j) = (*j) + ft_strlen(tmp_str) + 2;
 		else
-			(*j) = (*j) + algo;
-	}
-	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-	{
-		every_integer = va_arg(arguments, int);
-		ft_putnbr_fd(every_integer, 1);
-		test = ft_itoa(every_integer);
-		(*j) = (*j) + ft_strlen(test);
-		free(test);
-	}
-	else if (str[i + 1] == 'u')
-	{
-		every_unsigned_int = va_arg(arguments, unsigned int);
-		test = ft_print_utoa(every_unsigned_int);
-		(*j) = (*j) + ft_strlen(test);
-		free(test);
-	}
-	else if (str[i + 1] == 'x')
-	{
-		every_hex = va_arg(arguments, int);
-		ft_hex_print(test = ft_itohex(every_hex), 1);
-		(*j) = (*j) + ft_strlen(test);
-		free(test);
-	}
-	else if (str[i + 1] == 'X')
-	{
-		every_hex = va_arg(arguments, int);
-		ft_hex_print(test = ft_itohex(every_hex), 2);
-		(*j) = (*j) + ft_strlen(test);
-		free(test);
+			(*j) = (*j) + ft_strlen(tmp_str);
+		free(tmp_str);
 	}
 	else if (str[i + 1] == '%')
 	{
 		write(1, "%", 1);
 		(*j)++;
 	}
+	ft_index2(str, i, arguments, j);
+	ft_index3(str, i, arguments, j);
 	i = i + 2;
 	return (i);
 }

@@ -2,7 +2,7 @@ LIB = ar rcs
 RM = rm -f
 
 CC = gcc
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 SRC = printf.c ft_putstr.c ft_putnbr.c ft_putchar.c ft_itohex.c ft_hex_print.c ft_hex_print_void.c\

@@ -12,28 +12,29 @@
 
 #include "ft_printf.h"
 
-/* void	convert(int i, int nbr, int temp, char *str)
+void	ft_convert(int i, unsigned int nbr, char **str)
 {
+	int	temp;
+
 	while (i-- > 0)
 	{
 		if (nbr >= 0)
 		{
 			temp = nbr % 16;
 			if (temp >= 10 && temp <= 16)
-				str[i] = temp + 87;
+				(*str)[i] = temp + 87;
 			else
-				str[i] = temp + '0';
+				(*str)[i] = temp + '0';
 			nbr = nbr / 16;
 		}
 	}
-} */
+}
 
 char	*ft_itohex(int number)
 {
-	char				*str;
-	int					i;
-	int					temp;
-	unsigned int		nbr;
+	char			*str;
+	int				i;
+	unsigned int	nbr;
 
 	i = 0;
 	if (number == 0)
@@ -50,17 +51,6 @@ char	*ft_itohex(int number)
 	if (!str)
 		return (NULL);
 	str[i] = '\0';
-	while (i-- > 0)
-	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 16;
-			if (temp >= 10 && temp <= 16)
-				str[i] = temp + 87;
-			else
-				str[i] = temp + '0';
-			nbr = nbr / 16;
-		}
-	}
+	ft_convert(i, nbr, &str);
 	return (str);
 }

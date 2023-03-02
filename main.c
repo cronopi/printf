@@ -40,10 +40,9 @@ int	main(void)
 	printf("\n%i\n", N_devuelto);
 	N_devuelto = printf("verduras: %p ", 0);
 	printf("\n%i\n", N_devuelto);
-
+	//system("leaks a.out");
 	return (0);
 }
-
 
 /* 		if (every_integer > 0)
 		{
